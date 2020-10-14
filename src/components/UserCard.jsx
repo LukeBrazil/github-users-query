@@ -1,15 +1,15 @@
+import React from "react";
+import { Link } from 'react-router-dom';
 
-import React from 'react';
-
-const UserCard = props => {
-    return(
-        <div>
-            
-            <div>
-                <img src={props.avatar_url} alt={`${props.name}`}/>
-            </div>
-        </div>
-    )
-}
+const UserCard = (props) => {
+  return (
+    <div>
+      <li key={props.id}>
+        <img src={props.avatar_url} alt={`${props.name}`} ></img>
+        <Link to={`/users/${props.login}`}>Profile!</Link>
+      </li>
+    </div>
+  );
+};
 
 export default UserCard;
