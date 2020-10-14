@@ -47,7 +47,7 @@ class SearchForm extends Component {
         </form>
         <UserCardList users={this.state.user} />
         </Route>
-        <Route path={`/users/:userName`} component={UserProfile} />
+        <Route path={`/users/:userName`} component={UserProfile} users={this.state.user}/>
       </div>
     );
   }
