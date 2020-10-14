@@ -1,8 +1,15 @@
+
 import React from 'react';
 
 const UserCard = props => {
-    const { user } = props;
-    return (
-        null
+    return(
+        <div>
+            
+            <div>
+                <img src={props.avatar_url} alt={`${props.name}`}/>
+            </div>
+        </div>
     )
 }
+
+export default UserCard;

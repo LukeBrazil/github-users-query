@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { loadData } from "../utils/loadData";
+import UserCardList from './UserCardList'
 
  class SearchForm extends Component {
      state = {
@@ -14,11 +15,14 @@ import { loadData } from "../utils/loadData";
         })
     }
 
-    _handleSubmit = () => {
+    _handleSubmit = async (event) => {
+        event.preventDefault();
         const { userName } = this.state
-        const userData =  loadData(`https://api.github.com/users/${userName}`);
+        const userData =  await loadData(`https://api.github.com/users/${userName}`);
+        console.log(userData);
         this.setState({
-            user: [userData]
+            user: [...this.state.user, userData],
+            userName: '',
         })
     }
     render() {
@@ -27,12 +31,13 @@ import { loadData } from "../utils/loadData";
             <div>
                 <form>
                 <label htmlFor="" className="">
-                    <input type="text" onChange={event => {
+                    <input value={userName} type="text" onChange={event => {
                         this._handleChange(event.target.value)
                     }}/>
                 </label>
-                <button type='submit' className="" onSubmit={this._handleSubmit}>Search User!</button>
+                <button type='submit' className="" onClick={this._handleSubmit}>Search User!</button>
                 </form>
+                <UserCardList users={this.state.user}/>
             </div>
         )
     }
@@ -41,4 +46,3 @@ import { loadData } from "../utils/loadData";
 export default SearchForm;
  
 
-// Api url https://api.github.com/users/[username]
